@@ -6,10 +6,11 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   background-image:
-    linear-gradient(rgb(128 145 170 / 5%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(128 145 170 / 5%) 1px, transparent 1px);
-  background-size: 32px 32px;
-  font-family: "JetBrains Mono", "Cascadia Code", Consolas, Pretendard, monospace;
+    linear-gradient(135deg, rgb(255 226 234 / 42%), transparent 48%),
+    linear-gradient(315deg, rgb(222 237 255 / 48%), transparent 48%),
+    radial-gradient(rgb(115 130 165 / 10%) 0.7px, transparent 0.7px);
+  background-size: auto, auto, 18px 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
   line-height: 1.5;
 }
 
@@ -21,11 +22,17 @@ body {
 }
 
 .site-header {
-  min-height: 4.5rem;
+  min-height: 3.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-border);
+  margin-top: 1rem;
+  padding: 0.4rem 0.85rem;
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgb(65 75 112 / 5%);
+  backdrop-filter: blur(12px);
 }
 
 main {
@@ -48,16 +55,15 @@ main {
 .hero__description {
   max-width: 41rem;
   color: var(--color-muted);
-  font-family: Inter, Pretendard, system-ui, sans-serif;
-  font-size: clamp(1rem, 2vw, 1.12rem);
+  font-size: 1.08rem;
 }
 
 .hero h1,
 .game-heading h1 {
   margin-block: 0.35rem 0.75rem;
-  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  font-size: 3.75rem;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .hero h1 span {
@@ -67,7 +73,7 @@ main {
 .setup-panel {
   display: grid;
   gap: 1.5rem;
-  padding: clamp(3.5rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 2rem) 2rem;
+  padding: 3.75rem 1.5rem 1.5rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -96,7 +102,7 @@ main {
 }
 
 .game-heading h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: 2.75rem;
 }
 
 .game-actions {
@@ -106,10 +112,11 @@ main {
 .status-bar {
   justify-content: space-around;
   margin-bottom: 1.5rem;
-  padding: 2.9rem 1rem 1rem;
+  padding: 3.15rem 1rem 1rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
 .status-bar div {
@@ -126,9 +133,9 @@ main {
 
 .site-footer {
   justify-content: space-between;
-  min-height: 5rem;
+  min-height: 4rem;
   color: var(--color-muted);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
 }
 
 @media (min-width: 52rem) {
@@ -144,9 +151,17 @@ main {
 }
 
 @media (max-width: 35rem) {
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
   .game-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .game-heading h1 {
+    font-size: 2.2rem;
   }
 
   .option-grid {

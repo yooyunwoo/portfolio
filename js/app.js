@@ -338,7 +338,7 @@ elements.themeToggle.addEventListener('click', () => {
   savePreferences(appData);
 });
 
-const initialTheme = appData.themeMode ?? 'dark';
+const initialTheme = appData.themeMode ?? 'light';
 document.documentElement.dataset.theme = initialTheme;
 elements.themeToggle.setAttribute('aria-pressed', String(initialTheme === 'dark'));
 elements.themeToggle.querySelector('span').textContent = initialTheme === 'dark' ? '☀' : '☾';

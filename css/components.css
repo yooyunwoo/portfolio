@@ -28,17 +28,18 @@
   height: 2rem;
   display: grid;
   place-items: center;
-  color: var(--color-bg);
-  background: var(--color-primary);
+  color: #ffffff;
+  background: linear-gradient(145deg, #f79aaa, #e96c88);
   border-radius: 0.3rem;
   font-weight: 900;
+  box-shadow: 0 3px 8px rgb(233 108 136 / 24%);
 }
 
 .eyebrow {
   color: var(--color-primary-strong);
   font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -51,11 +52,63 @@
 
 .tech-stack span {
   padding: 0.3rem 0.55rem;
-  color: var(--color-primary-strong);
-  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 38%, transparent);
-  border-radius: 999px;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   font-size: 0.72rem;
+}
+
+.hero-art {
+  position: relative;
+  width: 13rem;
+  height: 8rem;
+  margin-top: 1.2rem;
+}
+
+.hero-art__card {
+  position: absolute;
+  width: 5.5rem;
+  aspect-ratio: 0.78;
+  display: grid;
+  place-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  font-size: 2.6rem;
+}
+
+.hero-art__card--back {
+  top: 0.75rem;
+  left: 1.4rem;
+  color: var(--color-accent);
+  background: #edf4ff;
+  transform: rotate(-13deg);
+}
+
+.hero-art__card--front {
+  top: 0.2rem;
+  left: 5.1rem;
+  background: #fff0f3;
+  transform: rotate(9deg);
+}
+
+.hero-art__sparkle {
+  position: absolute;
+  top: 0;
+  left: 10rem;
+  color: #e5ae4d;
+  font-size: 1.4rem;
+  animation: twinkle 1.8s ease-in-out infinite alternate;
+}
+
+.hero-art__sparkle--small {
+  top: 5.6rem;
+  left: 0;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  animation-delay: 0.6s;
 }
 
 .code-preview {
@@ -85,7 +138,7 @@
 }
 
 .dev-panel::before {
-  content: "●  ●  ●    " attr(data-panel-title);
+  content: attr(data-panel-title);
   position: absolute;
   top: 0;
   right: 0;
@@ -93,14 +146,20 @@
   min-height: 2.65rem;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 1rem 0 4.4rem;
   overflow: hidden;
   color: var(--color-muted);
   background: var(--color-surface-soft);
+  background-image:
+    radial-gradient(circle, #ff6159 0 0.28rem, transparent 0.3rem),
+    radial-gradient(circle, #ffbd2e 0 0.28rem, transparent 0.3rem),
+    radial-gradient(circle, #28c840 0 0.28rem, transparent 0.3rem);
+  background-position: 1rem center, 1.75rem center, 2.5rem center;
+  background-size: 0.6rem 0.6rem;
+  background-repeat: no-repeat;
   border-bottom: 1px solid var(--color-border);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   font-size: 0.7rem;
-  letter-spacing: 0.08em;
   white-space: pre;
 }
 
@@ -121,7 +180,7 @@ legend span {
   gap: 0.4rem;
   padding: 1rem;
   cursor: pointer;
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   text-align: center;
@@ -129,7 +188,7 @@ legend span {
 }
 
 .choice-card:has(input:checked) {
-  background: var(--color-surface-soft);
+  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
   border-color: var(--color-primary);
   box-shadow: inset 0 0 0 1px var(--color-primary);
 }
@@ -172,8 +231,9 @@ legend span {
 }
 
 .segmented-control label:has(input:checked) {
-  color: var(--color-bg);
+  color: #ffffff;
   background: var(--color-primary);
+  box-shadow: 0 2px 5px rgb(216 79 112 / 22%);
 }
 
 .segmented-control input {
@@ -201,12 +261,18 @@ legend span {
 }
 
 .button--primary {
-  color: var(--color-bg);
+  color: #ffffff;
   background: var(--color-primary);
+  box-shadow: 0 4px 10px rgb(216 79 112 / 18%);
 }
 
 .button--primary:hover {
   background: var(--color-primary-strong);
+}
+
+.button:active,
+.icon-button:active {
+  transform: translateY(1px);
 }
 
 .button--secondary,
@@ -250,14 +316,9 @@ legend span {
   font-size: 0.78rem;
 }
 
-.status-bar dt::before {
-  content: "const ";
-  color: var(--color-accent);
-}
-
 .status-bar dd {
   color: var(--color-primary-strong);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
 }
 
@@ -304,20 +365,23 @@ legend span {
 .memory-card__back {
   color: var(--color-primary);
   background:
-    linear-gradient(135deg, transparent 47%, color-mix(in srgb, var(--color-primary) 12%, transparent) 48% 52%, transparent 53%),
-    var(--color-surface-soft);
-  background-size: 18px 18px;
-  border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+    radial-gradient(circle, color-mix(in srgb, var(--color-primary) 20%, transparent) 1.2px, transparent 1.4px),
+    color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  background-size: 13px 13px;
+  border-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
   font-size: clamp(1.25rem, 5vw, 2rem);
 }
 
 .memory-card__back::after {
-  content: "</>";
-  padding: 0.25rem 0.35rem;
+  content: "✿";
+  width: 2.5rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 0.3rem;
-  font-size: clamp(0.72rem, 2vw, 1rem);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+  border-radius: 50%;
+  font-size: 1.25rem;
   font-weight: 800;
 }
 
@@ -326,6 +390,11 @@ legend span {
   border-color: var(--color-primary);
   font-size: clamp(1.5rem, 7vw, 3.2rem);
   transform: rotateY(180deg);
+}
+
+.memory-card--matched .memory-card__front {
+  background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
+  border-color: var(--color-success);
 }
 
 .modal {
@@ -360,9 +429,9 @@ legend span {
   display: grid;
   place-items: center;
   margin: 0 auto 1rem;
-  color: var(--color-bg);
-  background: var(--color-primary);
-  border-radius: 50%;
+  color: #ffffff;
+  background: var(--color-success);
+  border-radius: 1rem;
   font-size: 2rem;
 }
 
@@ -376,9 +445,9 @@ legend span {
   height: 0.55rem;
   display: inline-block;
   margin-right: 0.35rem;
-  background: var(--color-primary);
+  background: var(--color-success);
   border-radius: 50%;
-  box-shadow: 0 0 0.7rem var(--color-primary);
+  box-shadow: 0 0 0.5rem color-mix(in srgb, var(--color-success) 65%, transparent);
 }
 
 .site-footer a {
@@ -388,6 +457,10 @@ legend span {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@keyframes twinkle {
+  to { opacity: 0.45; transform: scale(0.82) rotate(18deg); }
 }
 
 :focus-visible {
