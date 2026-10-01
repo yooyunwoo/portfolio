@@ -47,22 +47,6 @@
   text-transform: uppercase;
 }
 
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-}
-
-.tech-stack span {
-  padding: 0.3rem 0.55rem;
-  color: var(--color-muted);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-size: 0.72rem;
-}
-
 .hero-art {
   position: relative;
   width: 13rem;
@@ -298,11 +282,12 @@ legend span {
 }
 
 .record-card {
-  padding: 3.6rem 1.25rem 1.25rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .record-card h2 {
@@ -311,8 +296,20 @@ legend span {
 }
 
 .record-card > p {
-  margin-top: 0.6rem;
+  margin: 0;
   color: var(--color-muted);
+  text-align: right;
+}
+
+@media (max-width: 35rem) {
+  .record-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+
+  .record-card > p {
+    text-align: left;
+  }
 }
 
 .status-bar dt {
@@ -443,16 +440,6 @@ legend span {
 .cursor {
   color: var(--color-primary);
   animation: blink 1s steps(2, start) infinite;
-}
-
-.status-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  display: inline-block;
-  margin-right: 0.35rem;
-  background: var(--color-success);
-  border-radius: 50%;
-  box-shadow: 0 0 0.5rem color-mix(in srgb, var(--color-success) 65%, transparent);
 }
 
 .site-footer a {
