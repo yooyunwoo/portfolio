@@ -470,8 +470,8 @@ legend span {
 }
 
 @keyframes card-deal {
-  from { opacity: 0; translate: 0 0.55rem; }
-  to { opacity: 1; translate: 0 0; }
+  from { translate: 0 0.55rem; }
+  to { translate: 0 0; }
 }
 
 @keyframes twinkle {
