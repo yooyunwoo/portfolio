@@ -1,6 +1,7 @@
 function createCardElement(card, index) {
   const button = document.createElement('button');
   button.className = 'memory-card';
+  button.style.animationDelay = `${Math.min(index, 10) * 24}ms`;
   button.type = 'button';
   button.dataset.cardId = card.id;
   button.setAttribute('role', 'gridcell');
