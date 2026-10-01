@@ -1,0 +1,168 @@
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(rgb(128 145 170 / 5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(128 145 170 / 5%) 1px, transparent 1px);
+  background-size: 32px 32px;
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas, Pretendard, monospace;
+  line-height: 1.5;
+}
+
+.site-header,
+.site-footer,
+.screen {
+  width: min(100% - 2rem, var(--content-width));
+  margin-inline: auto;
+}
+
+.site-header {
+  min-height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+}
+
+main {
+  flex: 1;
+}
+
+.screen {
+  padding-block: clamp(2rem, 6vw, 4.5rem);
+}
+
+.home-screen {
+  display: grid;
+  gap: 2rem;
+}
+
+.hero {
+  max-width: 44rem;
+}
+
+.hero__description {
+  max-width: 41rem;
+  color: var(--color-muted);
+  font-family: Inter, Pretendard, system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.12rem);
+}
+
+.hero h1,
+.game-heading h1 {
+  margin-block: 0.35rem 0.75rem;
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.hero h1 span {
+  color: var(--color-primary);
+}
+
+.setup-panel {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(3.5rem, 7vw, 4.5rem) clamp(1.25rem, 4vw, 2rem) 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.game-heading,
+.game-actions,
+.status-bar,
+.site-footer {
+  display: flex;
+  align-items: center;
+}
+
+.game-heading {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.game-heading h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.game-actions {
+  gap: 0.5rem;
+}
+
+.status-bar {
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+  padding: 2.9rem 1rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.status-bar div {
+  text-align: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns, 4), minmax(0, 1fr));
+  gap: clamp(0.5rem, 2vw, 1rem);
+  max-width: 39rem;
+  margin-inline: auto;
+}
+
+.site-footer {
+  justify-content: space-between;
+  min-height: 5rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 52rem) {
+  .home-screen {
+    grid-template-columns: minmax(0, 1.1fr) minmax(23rem, 0.9fr);
+    align-items: start;
+  }
+
+  .hero {
+    grid-row: span 2;
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 35rem) {
+  .game-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-bar {
+    gap: 0.4rem;
+    padding-inline: 0.4rem;
+  }
+
+  .status-bar dt {
+    font-size: 0.65rem;
+  }
+
+  .card-grid {
+    --grid-columns: 4 !important;
+  }
+}

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="같은 그림의 카드 두 장을 찾아 기록에 도전하는 기억력 게임"
+    />
+    <title>Memory Match</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/variables.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <script defer src="./js/utils.js"></script>
+    <script defer src="./js/game.js"></script>
+    <script defer src="./js/state.js"></script>
+    <script defer src="./js/storage.js"></script>
+    <script defer src="./js/ui.js"></script>
+    <script defer src="./js/audio.js"></script>
+    <script defer src="./js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+
+    <header class="site-header">
+      <a class="brand" id="home-link" href="#home" aria-label="Memory Match 홈">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span>memory.match()</span>
+      </a>
+      <button
+        class="icon-button"
+        id="theme-toggle"
+        type="button"
+        aria-label="색상 테마 변경"
+        aria-pressed="false"
+      >
+        <span aria-hidden="true">☾</span>
+      </button>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="screen home-screen" id="home" aria-labelledby="home-title">
+        <div class="hero">
+          <p class="eyebrow">// vanilla javascript game</p>
+          <h1 id="home-title">기억력을<br /><span>컴파일하세요.</span></h1>
+          <p class="hero__description">카드 배열을 탐색하고 같은 값을 가진 두 객체를 찾아보세요. 더 적은 이동으로 모든 pair를 해결하면 됩니다.</p>
+          <div class="tech-stack" aria-label="사용 기술">
+            <span>HTML5</span><span>CSS3</span><span>ES Modules</span><span>localStorage</span>
+          </div>
+          <pre class="code-preview" aria-label="게임 실행 코드 예시"><code><span>const</span> challenge = <span>await</span> memory.start();
+challenge.solve({ strategy: <b>'focus'</b> });</code></pre>
+        </div>
+
+        <form class="setup-panel dev-panel" id="game-setup" data-panel-title="game.config.js">
+          <fieldset>
+            <legend><span aria-hidden="true">01.</span> 카드 테마</legend>
+            <div class="option-grid">
+              <label class="choice-card">
+                <input type="radio" name="theme" value="animals" checked />
+                <span class="choice-card__icon" aria-hidden="true">🦊</span>
+                <span>동물 친구들</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="theme" value="web" />
+                <span class="choice-card__icon" aria-hidden="true">💻</span>
+                <span>웹 개발</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span aria-hidden="true">02.</span> 난이도</legend>
+            <div class="segmented-control">
+              <label><input type="radio" name="difficulty" value="easy" /> 쉬움</label>
+              <label><input type="radio" name="difficulty" value="normal" checked /> 보통</label>
+              <label><input type="radio" name="difficulty" value="hard" /> 어려움</label>
+            </div>
+          </fieldset>
+
+          <button class="button button--primary button--large" type="submit"><span aria-hidden="true">▶</span> run game</button>
+        </form>
+
+        <section class="record-card dev-panel" data-panel-title="personal.best.json" aria-labelledby="record-title">
+          <div>
+            <p class="eyebrow">// personal best</p>
+            <h2 id="record-title">아직 기록이 없어요</h2>
+          </div>
+          <p id="best-record">첫 게임을 완료하고 기록을 남겨보세요.</p>
+        </section>
+      </section>
+
+      <section class="screen game-screen" id="game" aria-labelledby="game-title" hidden>
+        <div class="game-heading">
+          <div>
+            <p class="eyebrow" id="game-theme">동물 친구들 · 보통</p>
+            <h1 id="game-title">pair 탐색 중<span class="cursor" aria-hidden="true">_</span></h1>
+          </div>
+          <div class="game-actions">
+            <button class="icon-button" id="sound-toggle" type="button" aria-label="효과음 끄기" aria-pressed="false">🔊</button>
+            <button class="button button--secondary" id="pause-button" type="button">일시 정지</button>
+          </div>
+        </div>
+
+        <dl class="status-bar dev-panel" data-panel-title="runtime.stats" aria-label="게임 진행 정보">
+          <div><dt>elapsedTime</dt><dd id="time-value">00:00</dd></div>
+          <div><dt>moves</dt><dd id="moves-value">0</dd></div>
+          <div><dt>matchedPairs</dt><dd><span id="matches-value">0</span><span class="status-divider"> / </span><span id="pairs-value">8</span></dd></div>
+        </dl>
+
+        <div
+          class="card-grid"
+          id="card-grid"
+          role="grid"
+          aria-label="기억력 카드 보드"
+          aria-busy="false"
+        ></div>
+
+        <button class="text-button" id="restart-button" type="button">게임 다시 시작</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><span class="status-dot" aria-hidden="true"></span> Vanilla JavaScript · No frameworks</p>
+      <a href="https://github.com/" target="_blank" rel="noreferrer">view source ↗</a>
+    </footer>
+
+    <dialog class="modal" id="pause-dialog" aria-labelledby="pause-title">
+      <h2 id="pause-title">게임이 일시 정지되었습니다</h2>
+      <p>준비되면 계속하기를 눌러주세요.</p>
+      <div class="modal__actions">
+        <button class="button button--primary" id="resume-button" type="button">계속하기</button>
+        <button class="button button--secondary" data-action="go-home" type="button">홈으로</button>
+      </div>
+    </dialog>
+
+    <dialog class="modal" id="result-dialog" aria-labelledby="result-title">
+      <p class="result-emoji" aria-hidden="true">✓</p>
+      <h2 id="result-title">build completed</h2>
+      <p id="result-summary">기록을 계산하고 있어요.</p>
+      <div class="modal__actions">
+        <button class="button button--primary" id="replay-button" type="button">다시 도전</button>
+        <button class="button button--secondary" data-action="go-home" type="button">다른 게임 선택</button>
+      </div>
+    </dialog>
+
+    <div class="sr-only" id="game-announcement" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>
